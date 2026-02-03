@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS CUSTOMERS (
     address TEXT
 );
 
--- Orders table
+-- Correct Orders table with FOREIGN KEY
 CREATE TABLE IF NOT EXISTS ORDERS (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT,
+    customer_id INT NOT NULL,
     order_date DATE,
     CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id)
 );
@@ -36,10 +36,9 @@ CREATE TABLE IF NOT EXISTS ORDERS (
 -- Order_Details table
 CREATE TABLE IF NOT EXISTS ORDER_DETAILS (
     orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT,
-    book_id INT,
+    order_id INT NOT NULL,
+    book_id INT NOT NULL,
     quantity DOUBLE,
     CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES ORDERS(order_id),
     CONSTRAINT fk_book FOREIGN KEY (book_id) REFERENCES BOOKS(book_id)
 );
-
